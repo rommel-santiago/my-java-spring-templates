@@ -1,10 +1,9 @@
 package com.sebnsab.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Transaction {
@@ -13,6 +12,13 @@ public class Transaction {
     private String description;
     private Date dateCreated;
     private Date dateModified;
+    private Set<DetailBiDirectional> detailBiDirectionals;
+    private Set<DetailUniDirectional> detailUniDirectionals;
+
+    public Transaction() {
+        detailBiDirectionals = new HashSet<>();
+        detailUniDirectionals = new HashSet<>();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +53,26 @@ public class Transaction {
     public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
+
+    @OneToMany(fetch = FetchType.LAZY)    // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
+    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
+    public Set<DetailBiDirectional> getDetailBiDirectionals() {
+        return detailBiDirectionals;
+    }
+
+    public void setDetailBiDirectionals(Set<DetailBiDirectional> detailBiDirectionals) {
+        this.detailBiDirectionals = detailBiDirectionals;
+    }
+
+
+    @OneToMany(fetch = FetchType.LAZY)    // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
+    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
+    public Set<DetailUniDirectional> getDetailUniDirectionals() {
+        return detailUniDirectionals;
+    }
+
+    public void setDetailUniDirectionals(Set<DetailUniDirectional> detailUniDirectionals) {
+        this.detailUniDirectionals = detailUniDirectionals;
+    }
+
 }
