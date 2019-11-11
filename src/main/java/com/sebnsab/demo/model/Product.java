@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,6 +20,8 @@ public class Product {
     }
 
     public Product(String productName) {
+        this.dateCreated = java.sql.Date.valueOf(LocalDate.now());
+        this.dateModified = this.dateCreated;
         this.productName = productName;
     }
 

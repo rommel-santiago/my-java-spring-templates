@@ -60,7 +60,7 @@ public class DetailBiDirectional {
         this.transaction = transaction;
     }
 
-    @OneToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
+    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
     public Product getProduct() {
         return product;
     }

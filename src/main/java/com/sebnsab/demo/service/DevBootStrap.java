@@ -55,7 +55,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         DetailBiDirectional dbd2 = new DetailBiDirectional(tran1);
 
         dbd1.setProduct(product1);
-        dbd1.setProduct(product2);
+        dbd2.setProduct(product2);
 
 
 
