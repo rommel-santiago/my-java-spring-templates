@@ -12,6 +12,7 @@ public class DetailBiDirectional {
     private Date dateCreated;
     private Date dateModified;
     private Transaction transaction;
+    private Product product;
 
 
     public DetailBiDirectional() {
@@ -50,12 +51,21 @@ public class DetailBiDirectional {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY) //This will always be join on the Detail Class Id because its annotated with @Id
+    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create transaction_id column, which will join to  Transaction Class Id because its annotated with @Id
     public Transaction getTransaction() {
         return transaction;
     }
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
