@@ -1,9 +1,11 @@
-package com.sebnsab.demo.model;
+package com.sebnsab.demo.model.relationship;
+
+import com.sebnsab.demo.model.relationship.Product;
+import com.sebnsab.demo.model.relationship.Transaction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class DetailBiDirectional {

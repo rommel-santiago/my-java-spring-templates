@@ -1,9 +1,9 @@
 package com.sebnsab.demo.service;
 
-import com.sebnsab.demo.model.DetailBiDirectional;
-import com.sebnsab.demo.model.DetailUniDirectional;
-import com.sebnsab.demo.model.Product;
-import com.sebnsab.demo.model.Transaction;
+import com.sebnsab.demo.model.relationship.DetailBiDirectional;
+import com.sebnsab.demo.model.relationship.DetailUniDirectional;
+import com.sebnsab.demo.model.relationship.Product;
+import com.sebnsab.demo.model.relationship.Transaction;
 import com.sebnsab.demo.repository.DetailBiDirectionalRepository;
 import com.sebnsab.demo.repository.DetailUniDirectionalRepository;
 import com.sebnsab.demo.repository.ProductRepository;
