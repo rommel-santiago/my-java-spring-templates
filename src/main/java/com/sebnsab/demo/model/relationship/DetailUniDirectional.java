@@ -7,7 +7,10 @@ import java.util.Date;
 @Entity
 public class DetailUniDirectional {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date dateCreated;
     private Date dateModified;
     private Long transaction_id;
@@ -21,8 +24,6 @@ public class DetailUniDirectional {
         this.transaction_id = transactionId;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

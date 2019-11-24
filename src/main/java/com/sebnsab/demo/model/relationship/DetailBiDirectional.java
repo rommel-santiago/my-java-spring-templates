@@ -10,10 +10,17 @@ import java.util.Date;
 @Entity
 public class DetailBiDirectional {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date dateCreated;
     private Date dateModified;
+
+    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create transaction_id column, which will join to  Transaction Class Id because its annotated with @Id
     private Transaction transaction;
+
+    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
     private Product product;
 
 
@@ -26,8 +33,6 @@ public class DetailBiDirectional {
         this.transaction = transaction;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -52,8 +57,6 @@ public class DetailBiDirectional {
         this.dateModified = dateModified;
     }
 
-
-    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create transaction_id column, which will join to  Transaction Class Id because its annotated with @Id
     public Transaction getTransaction() {
         return transaction;
     }
@@ -62,7 +65,6 @@ public class DetailBiDirectional {
         this.transaction = transaction;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
     public Product getProduct() {
         return product;
     }

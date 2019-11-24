@@ -7,6 +7,8 @@ import java.util.Date;
 @Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String productName;
     private Date dateCreated;
@@ -22,8 +24,7 @@ public class Product {
         this.productName = productName;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getId() {
         return id;
     }
