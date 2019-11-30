@@ -9,14 +9,24 @@ import java.util.Date;
 @Entity
 public class UserDetail {
 
-    private Long id;
-    private Date dateCreated;
-    private Date dateModified;
-    private Name name;
-    private Address address;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Date dateCreated;
+    private Date dateModified;
+
+    @Embedded
+    private Name name;
+
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "address", column = @Column(name = "home_address")),
+            @AttributeOverride(name = "state", column = @Column(name = "home_state")),
+            @AttributeOverride(name = "zipcode", column = @Column(name = "home_zipcode"))
+    })
+    private Address address;
+
     public Long getId() {
         return id;
     }
@@ -41,7 +51,6 @@ public class UserDetail {
         this.dateModified = dateModified;
     }
 
-    @Embedded
     public Name getName() {
         return name;
     }
@@ -50,12 +59,6 @@ public class UserDetail {
         this.name = name;
     }
 
-    @Embedded
-    @AttributeOverrides(value = {
-            @AttributeOverride(name = "address", column = @Column(name = "home_address")),
-            @AttributeOverride(name = "state", column = @Column(name = "home_state")),
-            @AttributeOverride(name = "zipcode", column = @Column(name = "home_zipcode"))
-    })
     public Address getAddress() {
         return address;
     }

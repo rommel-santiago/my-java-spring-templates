@@ -9,11 +9,19 @@ import java.util.Set;
 @Entity
 public class Transaction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private Date dateCreated;
     private Date dateModified;
+
+    @OneToMany(fetch = FetchType.LAZY)    // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
+    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
     private Set<DetailBiDirectional> detailBiDirectionals;
+
+    @OneToMany(fetch = FetchType.LAZY)    // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
+    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
     private Set<DetailUniDirectional> detailUniDirectionals;
 
     public Transaction() {
@@ -21,8 +29,6 @@ public class Transaction {
         detailUniDirectionals = new HashSet<>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -55,8 +61,6 @@ public class Transaction {
         this.dateModified = dateModified;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)    // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
-    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
     public Set<DetailBiDirectional> getDetailBiDirectionals() {
         return detailBiDirectionals;
     }
@@ -65,9 +69,6 @@ public class Transaction {
         this.detailBiDirectionals = detailBiDirectionals;
     }
 
-
-    @OneToMany(fetch = FetchType.LAZY)    // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
-    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
     public Set<DetailUniDirectional> getDetailUniDirectionals() {
         return detailUniDirectionals;
     }

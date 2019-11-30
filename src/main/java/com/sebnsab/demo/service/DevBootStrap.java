@@ -8,7 +8,9 @@ import com.sebnsab.demo.repository.DetailBiDirectionalRepository;
 import com.sebnsab.demo.repository.DetailUniDirectionalRepository;
 import com.sebnsab.demo.repository.ProductRepository;
 import com.sebnsab.demo.repository.TransactionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
+@Slf4j
 public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -29,6 +32,9 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    ApplicationContext context;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -70,6 +76,15 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         Transaction retrieved = transactionRepository.getById(1L);
 
         System.out.println(retrieved);
+
+        //Get hold of Spring's Application Context
+
+        context.getBeanDefinitionNames();
+
+
+        log.info("Data Pre Loaded. Successful");
+
+
 
 
 
