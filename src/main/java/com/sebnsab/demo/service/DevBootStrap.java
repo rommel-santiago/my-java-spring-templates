@@ -41,7 +41,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         initializeData();
     }
 
-    private void initializeData() {
+    public void initializeData() {
 
         Product product1 = new Product("Product1");
         Product product2 = new Product("Product2");
