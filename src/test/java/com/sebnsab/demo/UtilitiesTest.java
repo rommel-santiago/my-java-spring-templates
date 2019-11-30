@@ -18,7 +18,7 @@ public class UtilitiesTest {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Product product =  objectMapper.readValue(new File("src/test/resources/json/product.json"), Product.class);
-        
+
         System.out.println(product.getProductName());
 
     }
