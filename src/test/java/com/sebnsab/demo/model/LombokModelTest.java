@@ -1,9 +1,6 @@
-package com.sebnsab.demo.model.lombok;
+package com.sebnsab.demo.model;
 
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
 
 public class LombokModelTest {
 

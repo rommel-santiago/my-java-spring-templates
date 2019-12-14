@@ -1,5 +1,7 @@
 package com.sebnsab.demo.model.relationship;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
 
@@ -17,10 +19,15 @@ public class DetailBiDirectional {
     private Date dateCreated;
     private Date dateModified;
 
-    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create transaction_id column, which will join to  Transaction Class Id because its annotated with @Id
+    // This will create a column called transaction_id which will be join to transaction.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "transaction_id")
+    @JsonIgnore // This will prevent recursive calls when converting to Json
     private Transaction transaction;
 
-    @ManyToOne(fetch = FetchType.LAZY) //This will always automatically create product_id column, which will to  Product Class Id because its annotated with @Id
+    // This will create a column called product_id, which will be joined to the id of product
+    @ManyToOne(fetch = FetchType.EAGER) //Set to EAGER to avoid JSON Issues
+    @JoinColumn(name = "product_id")
     private Product product;
 
 

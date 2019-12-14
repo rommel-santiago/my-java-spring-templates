@@ -16,12 +16,15 @@ public class Transaction {
     private Date dateCreated;
     private Date dateModified;
 
-    @OneToMany(fetch = FetchType.LAZY)    // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
-    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
+    // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
+    // By Default the child table will be joined on this table's id which is annotated with @Id
+    // mappedby is the parent property on the child table
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "transaction")
     private Set<DetailBiDirectional> detailBiDirectionals;
 
-    @OneToMany(fetch = FetchType.LAZY)    // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
-    @JoinColumn(name = "transaction_id")  // This is id of Transaction Class that will be created on the Child Table
+    // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
+    // By Default the child table will be joined on this table's id which is annotated with @Id
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<DetailUniDirectional> detailUniDirectionals;
 
     public Transaction() {

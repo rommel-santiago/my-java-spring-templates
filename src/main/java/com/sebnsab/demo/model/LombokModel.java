@@ -1,4 +1,4 @@
-package com.sebnsab.demo.model.lombok;
+package com.sebnsab.demo.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
