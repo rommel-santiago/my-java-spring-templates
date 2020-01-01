@@ -15,7 +15,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -35,6 +37,9 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired
     ApplicationContext context;
+
+    @Autowired
+    private ServiceDemo serviceDemo;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -78,12 +83,28 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         System.out.println(retrieved);
 
         //Get hold of Spring's Application Context
-
         context.getBeanDefinitionNames();
 
 
+        try {
+            serviceDemo.addProducts();
+        }
+        catch (Exception e ){
+            System.out.println(e.getMessage());
+        }
+
+
+        List<Product> products = productRepository.findAll();
+
         log.info("Data Pre Loaded. Successful");
 
+        log.debug("Show debug");
+
+
+        for (int i = 0; i < 500000 ; i++) {
+            log.info("Loading Chooba Fill Me Up a lot");
+
+        }
 
 
 

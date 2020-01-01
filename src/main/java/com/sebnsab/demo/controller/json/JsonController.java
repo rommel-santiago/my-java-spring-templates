@@ -21,7 +21,7 @@ public class JsonController {
     @ResponseBody
     public List<Transaction> getListing() {
 
-        List<Transaction> transactions =  transactionRepository.findAll();
+        List<Transaction> transactions = transactionRepository.findAll();
         return transactions;
     }
 

@@ -1,4 +1,4 @@
-package com.sebnsab.demo.model;
+package com.sebnsab.demo.controller;
 
 public class JsonControllerTest {
 }
