@@ -6,9 +6,11 @@ import com.sebnsab.demo.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import sun.nio.ch.ThreadPool;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -27,17 +29,13 @@ public class ServiceDemo {
     @Autowired
     private EntityManager entityManager;
 
-
     @Autowired
     private TransactionRepository transactionRepository;
 
     public List<Transaction> getAllTransactions() {
-
         log.info(String.format("Demo Name is %s",demoName));
         log.info(String.format("Replace Name is %s",replace));
-
         return transactionRepository.findAll();
-
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -70,8 +68,8 @@ public class ServiceDemo {
     }
 
     private void flush(Integer count) {
-
         //This BATCH_SIZE should match spring.jpa.properties.hibernate.jdbc.batch_size = 2000
+        //End is needed so it clears up memory.
         int BATCH_SIZE = 2000;
 
         if (count > 0 && count % BATCH_SIZE == 0) {
@@ -80,6 +78,20 @@ public class ServiceDemo {
         }
 
         count++;
+
+    }
+
+    @Async("threadPoolTaskExecutor")
+    public void asyncCallDemo() {
+
+        try {
+            log.info("Sleeping..");
+            Thread.sleep(5000);
+            log.info("awake..");
+        } catch(InterruptedException e) {
+            log.error("Someone woke me up..");
+        }
+
 
     }
 

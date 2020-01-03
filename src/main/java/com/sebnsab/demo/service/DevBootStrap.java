@@ -44,6 +44,10 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         initializeData();
+        transactionalCalls();
+        asyncCalls();
+        //fillUpLogs();
+
     }
 
     public void initializeData() {
@@ -68,15 +72,11 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         dbd1.setProduct(product1);
         dbd2.setProduct(product2);
 
-
-
-
         detailBiDirectionalRepository.save(dbd1);
         detailBiDirectionalRepository.save(dbd2);
 
         detailUniDirectionalRepository.save(new DetailUniDirectional(tran1.getId()));
         detailUniDirectionalRepository.save(new DetailUniDirectional(tran1.getId()));
-
 
         Transaction retrieved = transactionRepository.getById(1L);
 
@@ -85,7 +85,15 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         //Get hold of Spring's Application Context
         context.getBeanDefinitionNames();
 
+        log.info("Data Pre Loaded. Successful");
 
+        log.debug("Show debug");
+
+    }
+
+
+
+    public void transactionalCalls() {
         try {
             serviceDemo.addProducts();
         }
@@ -93,23 +101,22 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
             System.out.println(e.getMessage());
         }
 
-
         List<Product> products = productRepository.findAll();
 
-        log.info("Data Pre Loaded. Successful");
+    }
 
-        log.debug("Show debug");
-
-
-        for (int i = 0; i < 500000 ; i++) {
+    public void fillUpLogs() {
+        for (int i = 0; i < 200000 ; i++) {
             log.info("Loading Chooba Fill Me Up a lot");
 
         }
+    }
 
-
-
-
-
+    public void asyncCalls() {
+        for (int i = 0; i <  5; i++) {
+            serviceDemo.asyncCallDemo();
+        }
 
     }
+
 }

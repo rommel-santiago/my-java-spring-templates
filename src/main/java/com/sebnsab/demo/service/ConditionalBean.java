@@ -9,7 +9,7 @@ public class ConditionalBean {
 
     public ConditionalBean() {
         System.out.println("Bean Loaded because load.bean was set to true ");
-        System.out.println(
+        System.out.println( "Other Annotations: \r\n" +
         "@ConditionalOnBean \r\n" +
         "@ConditionalOnClass \r\n" +
         "@ConditionalOnJava \r\n" +
