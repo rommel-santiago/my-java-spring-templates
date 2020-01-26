@@ -1,4 +1,4 @@
-package com.sebnsab.demo.service;
+package com.sebnsab.demo.others;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;

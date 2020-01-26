@@ -12,5 +12,6 @@ public class LombokModel {
     private String name;
     private Integer number;
 
+
 }
 

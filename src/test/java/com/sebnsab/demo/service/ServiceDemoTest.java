@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class ServiceDemoTest {
 
     @MockBean
     private TransactionRepository transactionRepository;
+
+    @MockBean
+    private EntityManager entityManager;
 
     @Autowired
     private ServiceDemo serviceDemo;

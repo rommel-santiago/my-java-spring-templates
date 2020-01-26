@@ -1,13 +1,16 @@
-package com.sebnsab.demo.service;
+package com.sebnsab.demo.bootstrap;
 
 import com.sebnsab.demo.model.relationship.DetailBiDirectional;
 import com.sebnsab.demo.model.relationship.DetailUniDirectional;
 import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
+import com.sebnsab.demo.others.AsyncDemo;
+import com.sebnsab.demo.others.TransactionalDemo;
 import com.sebnsab.demo.repository.DetailBiDirectionalRepository;
 import com.sebnsab.demo.repository.DetailUniDirectionalRepository;
 import com.sebnsab.demo.repository.ProductRepository;
 import com.sebnsab.demo.repository.TransactionRepository;
+import com.sebnsab.demo.service.ServiceDemo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -15,13 +18,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.util.List;
 
 @Component
 @Slf4j
-public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> {
+public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -40,6 +42,12 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired
     private ServiceDemo serviceDemo;
+
+    @Autowired
+    private AsyncDemo asyncDemo;
+
+    @Autowired
+    private TransactionalDemo transactionalDemo;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -93,9 +101,9 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 
 
 
-    public void transactionalCalls() {
+    private void transactionalCalls() {
         try {
-            serviceDemo.addProducts();
+            transactionalDemo.addProducts();
         }
         catch (Exception e ){
             System.out.println(e.getMessage());
@@ -112,9 +120,9 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         }
     }
 
-    public void asyncCalls() {
+    private void asyncCalls() {
         for (int i = 0; i <  5; i++) {
-            serviceDemo.asyncCallDemo();
+            asyncDemo.asyncCallDemo();
         }
 
     }

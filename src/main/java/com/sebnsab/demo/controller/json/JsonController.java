@@ -1,28 +1,63 @@
 package com.sebnsab.demo.controller.json;
 
+import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
+import com.sebnsab.demo.repository.ProductRepository;
 import com.sebnsab.demo.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+
+@RestController //@Restcontroller is the same as @Controller except it includes @ResponseBody
 public class JsonController {
 
     @Autowired
     private TransactionRepository transactionRepository;
 
-    @RequestMapping(value = "/listing", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    @ResponseBody
+    @Autowired
+    private ProductRepository productRepository;
+
+    @GetMapping(value = "/tranListing", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Transaction> getListing() {
 
         List<Transaction> transactions = transactionRepository.findAll();
         return transactions;
     }
+
+    @PutMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody final Product product) {
+
+        Optional<Product> prod = productRepository.findById(productId);
+
+        Product productRecord = prod.orElseThrow(() -> new RuntimeException(String.format("Id does not exist %s", product.getId())));
+
+        productRecord.setProductName(product.getProductName());
+
+        return productRepository.save(productRecord);
+
+    }
+
+    @DeleteMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Product deleteProduct(@PathVariable("productId") Long productId) {
+
+        return null;
+    }
+
+    @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Product getProduct(@PathVariable("productId") Long productId) {
+
+        Optional<Product> product = productRepository.findById(productId);
+
+        return product.orElse(null);
+
+    }
+
+
 
 }
