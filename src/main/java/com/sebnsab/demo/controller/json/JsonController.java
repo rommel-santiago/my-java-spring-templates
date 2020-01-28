@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,12 +50,21 @@ public class JsonController {
     }
 
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public Product getProduct(@PathVariable("productId") Long productId) {
 
         Optional<Product> product = productRepository.findById(productId);
 
         return product.orElse(null);
+
+    }
+
+    @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Product addProduct(@RequestBody Product product) {
+
+        product.setDateCreated(java.sql.Date.valueOf(LocalDate.now()));
+        product.setDateModified(product.getDateCreated());
+
+        return productRepository.save(product);
 
     }
 

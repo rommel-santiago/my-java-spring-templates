@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class AsyncDemo {
 
 
-    @Async("threadPoolTaskExecutor")
+    @Async("threadPoolTaskExecutor")  // threadPoolTaskExecutor is a Bean defined in ConfigDemo
     //For Async to work you have to have @EnableAsync on  Config Bean
     public void asyncCallDemo() {
 
