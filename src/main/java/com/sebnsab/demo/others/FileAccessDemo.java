@@ -27,7 +27,7 @@ public class FileAccessDemo {
 
 
         // getSource can be of 3 things below
-        
+
         //resourceLoader.getResource("classpath:files/blahtest.txt");
         //resourceLoader.getResource("file:/Users/rommel/IdeaProjects/java-spring/pom.xml");
         //resourceLoader.getResource("url:http://www.sda/com/test.txt");
