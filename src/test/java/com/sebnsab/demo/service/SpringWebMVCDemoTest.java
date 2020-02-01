@@ -42,15 +42,34 @@ public class SpringWebMVCDemoTest {
 
         Mockito.when(productRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(product));
 
-        String jsonString = new ObjectMapper().writeValueAsString(product);
-        jsonString = "asdfasdf";
-
         mockMvc.perform( MockMvcRequestBuilders
                 .get("/products/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.productName").value("test"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.productName").exists());
-        
+
+    }
+
+    @Test
+    public void mockMVCPutTest() throws Exception {
+
+        Product currentProduct = new Product("oldValue");
+        Product updateProduct = new Product("newValue");
+
+        Mockito.when(productRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(updateProduct));
+        Mockito.when(productRepository.save(Mockito.any(Product.class))).thenReturn(updateProduct);
+
+        String jsonString = new ObjectMapper().writeValueAsString(updateProduct);
+
+        mockMvc.perform( MockMvcRequestBuilders
+                .put("/products/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.productName").value("newValue"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.productName").exists());
+
     }
 }
