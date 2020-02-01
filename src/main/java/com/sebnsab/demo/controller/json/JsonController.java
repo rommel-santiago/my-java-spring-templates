@@ -44,9 +44,9 @@ public class JsonController {
     }
 
     @DeleteMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Product deleteProduct(@PathVariable("productId") Long productId) {
+    public String deleteProduct(@PathVariable("productId") Long productId) {
 
-        return null;
+        return "Deleted";
     }
 
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
