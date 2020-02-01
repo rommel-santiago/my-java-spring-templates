@@ -11,7 +11,7 @@ public class RetryDemoTest {
 
     @Autowired
     private RetryDemo retryDemo;
-    
+
     @Test
     public void retryDemoTest() {
 

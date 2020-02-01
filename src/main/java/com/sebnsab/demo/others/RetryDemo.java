@@ -17,7 +17,8 @@ public class RetryDemo {
     }
 
     @Recover
-    public void recover(DemoException d, String input) {
+    public void recover2(DemoException d, String input) {
+        System.out.println("Recovering2");
         System.out.println(input);
     }
 }
