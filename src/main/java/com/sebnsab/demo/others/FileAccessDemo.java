@@ -2,6 +2,7 @@ package com.sebnsab.demo.others;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,17 @@ public class FileAccessDemo {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    public void openFile() throws IOException {
+    public void openFile(String fileName) throws IOException {
 
 
-        Resource resource = resourceLoader.getResource("classpath:files/blah.txt");
+        Resource resource = resourceLoader.getResource(fileName);
 
+
+        // getSource can be of 3 things below
+        
+        //resourceLoader.getResource("classpath:files/blahtest.txt");
+        //resourceLoader.getResource("file:/Users/rommel/IdeaProjects/java-spring/pom.xml");
+        //resourceLoader.getResource("url:http://www.sda/com/test.txt");
 
         File f = resource.getFile();
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
@@ -32,8 +39,6 @@ public class FileAccessDemo {
                 String line = br.readLine();
                 System.out.println(line);
                 String[] cols = line.split(",");
-                System.out.println(cols);
-
             }
 
 
