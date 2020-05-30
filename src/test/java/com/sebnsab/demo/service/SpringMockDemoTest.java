@@ -4,11 +4,13 @@ import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
 import com.sebnsab.demo.repository.ProductRepository;
 import com.sebnsab.demo.repository.TransactionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -27,6 +29,7 @@ import java.util.List;
 // Remove classes if you want springboottest to load all beans but will be slow
 // So its advisable to specify the classes you want to test only.
 @ActiveProfiles("test")
+@Slf4j
 public class SpringMockDemoTest {
 
     @MockBean
@@ -38,8 +41,17 @@ public class SpringMockDemoTest {
     @Autowired
     private ServiceDemo serviceDemo;
 
+    @Value("${_csrf.parameterName}")
+    private String csfName;
+
+    @Value("${_csrf.token}")
+    private String csfToken;
+
     @Test
     public void getAllTransactionTest() {
+
+        log.info(csfName);
+        log.info(csfToken);
 
         List<Transaction> transactions = new ArrayList<>();
 

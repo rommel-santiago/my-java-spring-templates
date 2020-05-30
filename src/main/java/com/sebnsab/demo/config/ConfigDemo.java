@@ -6,11 +6,17 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableAsync
 @EnableScheduling
 @EnableRetry
+@EnableWebSecurity  //For Spring Security
+@EnableGlobalMethodSecurity(securedEnabled=true , prePostEnabled=true) //For Spring Security to all method level
 public class ConfigDemo {
 
     @Bean("threadPoolTaskExecutor")
@@ -22,5 +28,10 @@ public class ConfigDemo {
         threadPool.setQueueCapacity(250);
 
         return threadPool;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

@@ -4,6 +4,7 @@ import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
 import com.sebnsab.demo.repository.ProductRepository;
 import com.sebnsab.demo.repository.TransactionRepository;
+import com.sebnsab.demo.service.ServiceDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,21 @@ public class JsonController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ServiceDemo serviceDemo;
+
     @GetMapping(value = "/tranListing", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Transaction> getListing() {
 
         List<Transaction> transactions = transactionRepository.findAll();
         return transactions;
+    }
+
+
+    @GetMapping(value = "/securedListing", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Transaction> getListingSecured() {
+
+        return serviceDemo.getAllTransactions();
     }
 
     @PutMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)

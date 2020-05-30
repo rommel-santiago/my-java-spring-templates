@@ -6,8 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Service
@@ -23,6 +26,10 @@ public class ServiceDemo {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    //@Secured("ROLE_USER")
+    //@PreAuthorize("hasRole('USER')")
+    //@Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public List<Transaction> getAllTransactions() {
         log.info(String.format("Demo Name is %s",demoName));
         log.info(String.format("Replace Name is %s",replace));

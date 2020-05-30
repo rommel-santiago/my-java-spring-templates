@@ -5,12 +5,15 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 @Service
@@ -43,6 +46,17 @@ public class FileAccessDemo {
 
 
         }
+
+
+    }
+
+    public Resource[] getListOfResources() throws IOException {
+
+        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath:folder/**/*.xml");
+        //Resource[] resources = new PathMatchingResourcePatternResolver().getResources("file:folder/**/*.xml");
+
+        return resources;
+
 
 
     }

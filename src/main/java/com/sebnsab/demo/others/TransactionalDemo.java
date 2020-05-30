@@ -36,7 +36,7 @@ public class TransactionalDemo {
 
         for( Product product : products) {
             entityManager.persist(product);
-            flush(count);
+            flush(count); //this saves it in batches
         }
 
         // No need to flush here
