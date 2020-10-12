@@ -19,7 +19,7 @@ public class TransactionalDemo {
     @Transactional(propagation = Propagation.REQUIRED)
     //Also to work, this method should be called from another bean, Most likely from a Controller bean or another Service Bean
     //and should be called directly not indirectly
-    //Also check application.properties for the properties required for batching to work
+    //Also check application.yml for the properties required for batching to work
     public List<Product> addProducts() {
 
         List<Product> products = new ArrayList<>();

@@ -20,6 +20,7 @@ public class Transaction {
     // By Default the child table will be joined on this table's id which is annotated with @Id
     // mappedby is the parent property on the child table
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "transaction")
+    //@JoinColumn(name="columnOnTheManyTable", referencedColumn="ColumnOnOneTable"
     private Set<DetailBiDirectional> detailBiDirectionals;
 
     // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class

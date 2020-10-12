@@ -58,6 +58,14 @@ public class FileAccessDemo {
         return resources;
 
 
+    }
+
+    public String getFileViaClassPAth() throws  IOException {
+        ClassPathResource resource = new ClassPathResource("blah/a_file.txt");
+
+        resource.getFile();
+        return null;
+
 
     }
 

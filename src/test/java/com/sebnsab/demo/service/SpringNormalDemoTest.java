@@ -17,7 +17,7 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @Import(ServiceDemo.class)
-@PropertySource(value = {"classpath:application-test.properties","classpath:application.properties"})
+@PropertySource(value = {"classpath:application-test.properties","classpath:application.yml"})
 public class SpringNormalDemoTest {
 
 

@@ -1,0 +1,83 @@
+load.bean: true
+
+service:
+  demo.name: prod
+  demo.replace: prod
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    # Show SQL statements in Log
+    show-sql: true
+    properties.hibernate: format_sql=true
+  h2:
+    console.enabled: true #http://localhost:8080/h2-console
+
+######################
+## BATCH PROPERTIES ##
+######################
+
+# Source:         //https://www.baeldung.com/jpa-hibernate-batch-insert-update
+# IMPORTANT: Properties below wil only work when the GenerationType Id of the model you are updating is GenerationType.Sequence
+# it will not work for IDENTITY or others.
+
+# Batch Size When Inserting and Updating Records
+spring.jpa.properties.hibernate.jdbc.batch_size: 2000
+
+# This is required so JPA will allow us to do batch inserts with multiple entities (ie models)
+spring.jpa.properties.hibernate.order_inserts: true
+
+# This is required so JPA will allow us to do batch updates with multiple entities
+spring.jpa.properties.hibernate.order_updates: true
+spring.jpa.properties.hibernate.batch_versioned_data: true
+
+########################
+## LOGGING PROPERTIES ##
+########################
+
+# Log properties below is used in conjunction with logback-spring.xml
+# logback-spring.xml configured for INFO but we can add more
+# Iam not using most of spring boots default logging properties because it forces me to only use one type of Appender
+
+logging.file.name: /Users/rommel/IdeaProjects/applogs/demo/demo.log
+
+logging:
+  level:
+    root: INFO
+    com.sebnsab.demo.bootstrap.DataLoader: DEBUG
+    ßcom.viber: DEBUG
+
+# yml version
+# logging:
+#   level:
+#    com.sebnsab.demo.bootstrap.dataloader: DEBUG
+
+#########################
+## SECURITY PROPERTIES ##
+#########################
+
+#seconds for minutes you put in 10m. You cannot set it for less than 60s
+#server.servlet.session.timeout=120
+
+
+server:
+  port: 8080
+  ssl:
+    enabled: false
+    key-alias: test
+    key-store: "path/to/cert.jks"
+    key-store-password: "password"
+
+application.viber-bot:
+  auth-token: "4c336a7e15400bba-7137707f7243c631-2e5fddb8c7bb4ce5"
+  webhook-url: "https://localhost:8080/viber"
+  name: "EchoBot"
+  avatar: "http://example.com/avatar.jpg"
+
+viber:
+  private.key: 4c336a7e15400bba-7137707f7243c631-2e5fddb8c7bb4ce5
