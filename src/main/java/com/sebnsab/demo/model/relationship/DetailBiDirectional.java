@@ -4,19 +4,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Getter @Setter
+
 public class DetailBiDirectional {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name ="dateCreated")
     private Date dateCreated;
+
+    @Column(name ="dateModified")
     private Date dateModified;
 
     // This will create a column called transaction_id which will be join to transaction.
@@ -30,7 +38,6 @@ public class DetailBiDirectional {
     @JoinColumn(name = "product_id")
     private Product product;
 
-
     public DetailBiDirectional() {
     }
 
@@ -40,43 +47,5 @@ public class DetailBiDirectional {
         this.transaction = transaction;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Date dateModified) {
-        this.dateModified = dateModified;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }

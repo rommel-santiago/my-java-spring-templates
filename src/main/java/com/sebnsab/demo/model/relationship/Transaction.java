@@ -1,31 +1,46 @@
 package com.sebnsab.demo.model.relationship;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter @Setter
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "dateCreated")
     private Date dateCreated;
+
+    @Column(name = "dateModified")
     private Date dateModified;
 
     // This is Bidirectional because there is also a @ManyTonOne on DetailBiDirectional Class
     // By Default the child table will be joined on this table's id which is annotated with @Id
     // mappedby is the parent property on the child table
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "transaction")
-    //@JoinColumn(name="columnOnTheManyTable", referencedColumn="ColumnOnOneTable"
+    //If you only need to map the column itself not the object
+    //You can also just use @Join
+    //@JoinColumn(name="columnOnTheManyTable", referencedColumnName="ColumnOnOneTable"
     private Set<DetailBiDirectional> detailBiDirectionals;
 
     // This is UniDirectional because there is no @ManyTonOne on DetailUniDirectional Class
-    // By Default the child table will be joined on this table's id which is annotated with @Id
+    // So you have to specify the @JoinColumn
     @OneToMany(fetch = FetchType.LAZY)
+    //@JoinColumn(name="columnOnTheManyTable", referencedColumnName="ColumnOnOneTable"
+    @JoinColumn(name="transaction_id", referencedColumnName ="id")
     private Set<DetailUniDirectional> detailUniDirectionals;
 
     public Transaction() {
@@ -33,52 +48,5 @@ public class Transaction {
         detailUniDirectionals = new HashSet<>();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Date dateModified) {
-        this.dateModified = dateModified;
-    }
-
-    public Set<DetailBiDirectional> getDetailBiDirectionals() {
-        return detailBiDirectionals;
-    }
-
-    public void setDetailBiDirectionals(Set<DetailBiDirectional> detailBiDirectionals) {
-        this.detailBiDirectionals = detailBiDirectionals;
-    }
-
-    public Set<DetailUniDirectional> getDetailUniDirectionals() {
-        return detailUniDirectionals;
-    }
-
-    public void setDetailUniDirectionals(Set<DetailUniDirectional> detailUniDirectionals) {
-        this.detailUniDirectionals = detailUniDirectionals;
-    }
 
 }

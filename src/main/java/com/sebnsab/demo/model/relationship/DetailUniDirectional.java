@@ -1,18 +1,28 @@
 package com.sebnsab.demo.model.relationship;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Getter @Setter
 public class DetailUniDirectional {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "dateCreated")
     private Date dateCreated;
+
+    @Column(name = "dateModified")
     private Date dateModified;
+
+    @Column(name = "transaction_id")
     private Long transaction_id;
 
     public DetailUniDirectional() {
@@ -24,35 +34,4 @@ public class DetailUniDirectional {
         this.transaction_id = transactionId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Date dateModified) {
-        this.dateModified = dateModified;
-    }
-
-    public Long getTransaction_id() {
-        return transaction_id;
-    }
-
-    public void setTransaction_id(Long transaction_id) {
-        this.transaction_id = transaction_id;
-    }
 }
