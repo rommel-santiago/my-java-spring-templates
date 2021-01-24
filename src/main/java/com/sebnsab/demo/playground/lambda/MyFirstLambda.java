@@ -38,9 +38,13 @@ public class MyFirstLambda {
          *
          *  And since its a single line code can be further shortened:
          *  MyFirstFunctionalInterface fi =  (n) -> System.out.println(n);
+
+         *  Finally you can also use Method Reference to further shorten it to be like
+         *  MyFirstFunctionalInterface fi =  System.out:println;
+
          */
 
-        //Then you can just use it like a typically object
+                //Then you can just use it like a typically object
         fi.oneAbstractMethod("rommel");
 
 
@@ -48,21 +52,23 @@ public class MyFirstLambda {
 
     private static void typicalUsageOfLambda() {
 
-        List<Person> persons = Arrays.asList(
-                new Person("jeeps"),
-                new Person("rache"),
-                new Person("sebi"),
-                new Person("sab"));
+        List<Person1> persons = Arrays.asList(
+                new Person1("jeeps"),
+                new Person1("rache"),
+                new Person1("sebi"),
+                new Person1("sab"));
 
-        for (Person p : persons) {
-            assignNumber(p, a -> a.setRandomNumber(new Random().nextInt()));
-            System.out.println(p.toString());
-        }
+        persons.stream()
+                .forEach(a -> a.setRandomNumber(new Random().nextInt()));
+
+        persons.stream()
+                .forEach(a -> System.out.println(a.toString()));
+
 
 
     }
 
-    private static void assignNumber(Person p, modifyPerson number) {
+    private static void assignNumber(Person1 p, ModifyPerson number) {
         number.assign(p);
     }
 
@@ -73,18 +79,18 @@ interface MyFirstFunctionalInterface {
     void oneAbstractMethod(String name);
 }
 
-interface modifyPerson {
-    void assign(Person person);
+interface ModifyPerson {
+    void assign(Person1 person);
 }
 
 @Getter
 @Setter
 @ToString
-class Person {
+class Person1 {
     private String name;
     private Integer randomNumber;
 
-    Person(String name) {
+    Person1(String name) {
         this.name = name;
     }
 
