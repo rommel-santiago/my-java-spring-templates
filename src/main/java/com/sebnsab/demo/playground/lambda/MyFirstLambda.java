@@ -1,18 +1,18 @@
 package com.sebnsab.demo.playground.lambda;
 
+import com.sebnsab.demo.playground.iz0809.DefaultAccessModifier;
+import com.sebnsab.demo.playground.iz0809.ExtendsD;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 
 public class MyFirstLambda {
 
     public static void main(String[] args) {
+
+
         myFirstLambdaExpression();
         typicalUsageOfLambda();
 

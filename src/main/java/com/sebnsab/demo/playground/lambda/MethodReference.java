@@ -12,6 +12,14 @@ public class MethodReference {
 
     public static void main(String[] args) {
 
+
+        try {
+
+            throw new RuntimeException("blah");
+        } finally {
+            System.out.println("finally");
+        }
+/*
         List<Person2> persons = Arrays.asList(
                 new Person2("jeeps"),
                 new Person2("rache"),
@@ -23,7 +31,7 @@ public class MethodReference {
                 .map(String::toUpperCase) // also by public method of class
                 .map(MethodReference::addSuffix)  // by static method
                 .forEach(System.out::println);
-
+*/
 
     }
     private static String addSuffix(String name) {

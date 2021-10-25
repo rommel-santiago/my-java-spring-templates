@@ -12,7 +12,7 @@ public class ScheduledCronDemo {
     @Scheduled(cron = "0 * * * * MON-FRI")
     public void scheduledDemo() throws InterruptedException{
         log.info("Starting Scheduled");
-        Thread.sleep(20000);
+        //Thread.sleep(20000);
         log.info("End Scheduled");
 
     }

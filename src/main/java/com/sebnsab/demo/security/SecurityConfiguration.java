@@ -36,11 +36,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/login*").permitAll()
                 //.antMatchers("/anonymous*").anonymous()
 
-                .antMatchers("/*").permitAll() //Permit all URLS, just leave the authorization on the Service Beans @PreAuthorize.
-                .anyRequest().authenticated().and()
+                .antMatchers("/*").permitAll(); //Permit all URLS, just leave the authorization on the Service Beans @PreAuthorize.
+                //.anyRequest().authenticated().and()
 
-            .formLogin()
-                .permitAll();
+            //.formLogin();
+              //  .permitAll();
 
     }
 

@@ -1,6 +1,7 @@
 package com.sebnsab.demo.others;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -22,6 +23,9 @@ public class FileAccessDemo {
 
     @Autowired
     private ResourceLoader resourceLoader;
+
+ //   @Value("classpath:resource.txt")
+ //   private Resource resource;
 
     public void openFile(String fileName) throws IOException {
 

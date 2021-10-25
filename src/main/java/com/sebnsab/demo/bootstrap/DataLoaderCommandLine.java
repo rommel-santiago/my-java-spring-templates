@@ -12,8 +12,6 @@ public class DataLoaderCommandLine implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //args is the argument passed when you run the app via java.
-
-        System.out.println(args[0]);
         log.info("passing through command line runner");
     }
 }
