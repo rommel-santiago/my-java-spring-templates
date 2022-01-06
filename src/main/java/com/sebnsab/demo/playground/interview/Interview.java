@@ -1,14 +1,21 @@
 package com.sebnsab.demo.playground.interview;
 
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Interview {
 
     public static void main(String[] args) {
-        String t;
+
+        final ConcurrentHashMap<String,String> t = new ConcurrentHashMap<>();
+
+
 
 
     }
+
+
 
     private interface blah {
         public void boo();

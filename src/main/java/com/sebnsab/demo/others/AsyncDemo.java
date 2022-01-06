@@ -1,5 +1,6 @@
 package com.sebnsab.demo.others;
 
+import com.sebnsab.demo.patterns.SingletonClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
