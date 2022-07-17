@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sebnsab</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>my-java-spring-templates</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>my-java-spring-templates</name>
+	<description>a consolidation of all the Spring Annotation Technology That will server as my template when creating new Java Spring Boot Application</description>
 
 	<properties>
 		<java.version>1.8</java.version>
