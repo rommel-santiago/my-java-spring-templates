@@ -1,6 +1,7 @@
 package com.sebnsab.demo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sebnsab.demo.bootstrap.DataLoaderCommandLine;
 import com.sebnsab.demo.controller.json.JsonController;
 import com.sebnsab.demo.model.relationship.Product;
 import com.sebnsab.demo.model.relationship.Transaction;
@@ -10,8 +11,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -24,6 +27,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(JsonController.class)
+@AutoConfigureMockMvc(addFilters = false)  // Disables Security
+@Import(DataLoaderCommandLine.class) // Sample if you want to a bean that you dont want to mock
 public class JsonControllerTest {
 
     @Autowired

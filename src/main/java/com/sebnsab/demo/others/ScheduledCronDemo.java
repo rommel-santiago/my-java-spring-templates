@@ -8,12 +8,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ScheduledCronDemo {
 
-    @Scheduled(fixedRate = 5000)
-    @Scheduled(cron = "0 * * * * MON-FRI")
+    //@Scheduled(fixedRate = 5000)
+    @Scheduled(cron ="0 0 21 * * MON-FRI", zone = "Europe/London")
     public void scheduledDemo() throws InterruptedException{
-        log.info("Starting Scheduled");
-        //Thread.sleep(20000);
-        log.info("End Scheduled");
+        log.info("Triggering Job ");
 
     }
 }

@@ -25,8 +25,14 @@ public class FileDemoTest {
     @Test
     public void fileDemoTest() throws IOException {
 
-        fileAccessDemo.openFile("classpath:files/blahtest.txt");
-        fileAccessDemo.openFile("file:/Users/rommel/IdeaProjects/java-spring/pom.xml");
+        Integer r = null;
+
+        Integer b = 0;
+        System.out.println(b.equals(r));
+
+
+//        fileAccessDemo.openFile("classpath:files/blahtest.txt");
+//        fileAccessDemo.openFile("file:/Users/rommel/IdeaProjects/java-spring/pom.xml");
 
         //You can also do something like fileAccessDemo.openFile(url:http://www.sda/com/test.txt");
 
