@@ -1,15 +1,19 @@
 package com.sebnsab.demo.model.relationship;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Getter @Setter
-public class Product {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Product  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +28,6 @@ public class Product {
 
     @Column(name = "dateModified")
     private Date dateModified;
-
-    public Product() {
-    }
 
     public Product(String productName) {
         this.dateCreated = java.sql.Date.valueOf(LocalDate.now());

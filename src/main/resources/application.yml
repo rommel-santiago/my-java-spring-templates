@@ -81,3 +81,8 @@ application.viber-bot:
 
 viber:
   private.key: 4c336a7e15400bba-7137707f7243c631-2e5fddb8c7bb4ce5
+
+#########################
+## JACKSON PROPERTIES ##
+#########################
+spring.jackson.serialization.FAIL_ON_EMPTY_BEANS: false

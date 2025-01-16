@@ -34,7 +34,7 @@ public class DetailBiDirectional {
     private Transaction transaction;
 
     // This will create a column called product_id, which will be joined to the id of product
-    @ManyToOne(fetch = FetchType.EAGER) //Set to EAGER to avoid JSON Issues
+    @ManyToOne(fetch = FetchType.LAZY) //Set to EAGER to avoid JSON Issues
     @JoinColumn(name = "product_id")
     private Product product;
 
